@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.bank.dao.MemberDao">
+	<insert id="insertMember" parameterType="member">
+		<![CDATA[
+			insert into member (id, name, password, email, address, detailAddress)
+			values (#{id},#{name},#{password},#{email},#{address},#{detailAddress})
+		]]>
+	</insert>
+	
+	<select id="selectMember" parameterType="String" resultType="member">
+		<![CDATA[
+			select * from member where id = #{id}
+		]]>
+	</select>
+</mapper>
