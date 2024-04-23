@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.kosta.bank.dto.AccountDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,10 @@ public class Account {
 	private String type;
 	@Column 
 	private String grade;
+	
+	public AccountDto toAccountDto() {
+		return new AccountDto(id,name,balance,type,grade);
+	}
 	
 	public void deposit(int money) throws Exception {
 		if(money < 0) throw new Exception("입금액 오류"); 

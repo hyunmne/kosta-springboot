@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosta.bank.dto.AccountDto;
 import com.kosta.bank.entity.Account;
 import com.kosta.bank.service.AccountService;
 
@@ -27,7 +28,7 @@ public class AccountController {
 	}
 	
 	@PostMapping("/makeAccount")
-	public String makeAccount(@ModelAttribute("acc") Account acc, Model model) {
+	public String makeAccount(@ModelAttribute("acc") AccountDto acc, Model model) {
 		try {
 			accService.makeAccount(acc);
 			return "accountInfo";
@@ -106,7 +107,7 @@ public class AccountController {
 	public ModelAndView allAccountInfo() {
 		ModelAndView mav = new ModelAndView();
 		try {
-			List<Account> accs = accService.accList();
+			List<AccountDto> accs = accService.accList();
 			mav.addObject("accs", accs);
 			mav.setViewName("allAccountInfo");
 		} catch(Exception e) {
