@@ -1,11 +1,15 @@
 package com.kosta.board.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -134,4 +138,16 @@ public class BoardController {
 			return "none";
 		}
 	}
+	
+	@GetMapping("/image")
+	public void imageView(Integer num, HttpServletResponse response) {
+		try {
+			String path = "C:/lhm/spring_upload/";
+			FileInputStream fis = new FileInputStream(new File(path, num+""));
+			FileCopyUtils.copy(fis, response.getOutputStream());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

@@ -78,11 +78,12 @@ function imageSizeChange(image) {
 	<section id="./writeForm">
 		<h2>게시판 글 등록</h2>
 		<form action="boardWrite" method="post" enctype="multipart/form-data" name="boardform">
+			<input type="hidden" value="${user }" name="writer" />
 			<table>
-				<tr>
-					<td class="td_left"><label for="writer">글쓴이</label></td>
-					<td class="td_right"><input type="text" name="writer" id="writer"/></td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td class="td_left"><label for="writer">글쓴이</label></td> -->
+<!-- 					<td class="td_right"><input type="text" name="writer" id="writer"/></td> -->
+<!-- 				</tr> -->
 				<tr>
 					<td class="td_left"><label for="subject">제목</label></td>
 					<td class="td_right"><input name="subject" type="text"

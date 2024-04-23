@@ -63,7 +63,9 @@
 	</table>
 	
 	<div id="commandCell">
-		<a href="boardModify?num=${brd.num }">수정</a>&nbsp;&nbsp;&nbsp; 
+		<c:if test="${user eq brd.writer }">
+			<a href="boardModify?num=${brd.num }">수정</a>&nbsp;&nbsp;&nbsp; 
+		</c:if>
 		<a href="boardList">목록</a>&nbsp;&nbsp;&nbsp;
 		<c:if test="${user ne Empty }">
 			<c:choose>
