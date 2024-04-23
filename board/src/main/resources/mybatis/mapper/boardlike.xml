@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.board.dao.boardlikeDao">
+	<insert id="insertBrdLike" parameterType="java.util.Map">
+		<![CDATA[
+			insert into boardlike (memberid, boardnum)
+			values (#{memberId}, #{boardNum})
+		]]>
+	</insert>
+	
+	<delete id="deleteBrdLike" parameterType="java.util.Map">
+		<![CDATA[
+			delete from boardlike 
+			where memberid=#{memberId} and boardnum=#{boardNum}
+		]]>
+	</delete>
+	
+	<select id="selectBrdLike" parameterType="java.util.Map" resultType="Integer">
+		<![CDATA[
+			select num from boardlike
+			where memberid=#{memberId} and boardnum=#{boardNum}
+		]]>
+	</select>
+</mapper>

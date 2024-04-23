@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.dao.boardDao">
+	<select id="selectBrdList" parameterType="Integer" resultType="Board">
+		<![CDATA[
+			select * from board order by num desc
+			limit #{row}, 10 
+		]]>
+	</select>
+	
+	<select id="selectBrdCnt" resultType="Integer">
+		<![CDATA[
+			select count(*) from board
+		]]>
+	</select>
+	
+<!-- 	# : 문자열일 경우 '까지 붙여줘야 함 -->
+<!-- 	$ : 따옴표 없이 원래의 값 자체를 쿼리문에 삽입하고 싶을 때 -->
+	<select id="selectBrdSearchList" parameterType="Map" resultType="Board">
+		<![CDATA[
+			select * from board
+			where ${type} like '%${word}%'
+			order by num desc limit #{row}, 10 
+		]]>
+	</select>
+	
+	<select id="selectBrdSearchCnt" resultType="Integer">
+		<![CDATA[
+			select count(*) from board
+			where ${type} like '%${word}%'
+		]]>
+	</select>
+	
+	<select id="selectBoard" parameterType="Integer" resultType="Board">
+		<![CDATA[
+			select * from board where num = #{num}
+		]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="num">
+		<![CDATA[
+			insert into board (subject, content, writedate, filenum, writer)
+			values (#{subject}, #{content}, curdate(), #{filenum}, #{writer})
+		]]>
+	</insert>
+	
+	<insert id="insertFile" parameterType="BFile" useGeneratedKeys="true" keyProperty="num">
+		<![CDATA[
+			insert into file (directory, name, size, contenttype, uploaddate)
+			values (#{directory}, #{name}, #{size}, #{contenttype}, CURDATE())
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="Board">
+		update board
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="subject != null">subject=#{subject},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="filenum != null">filenum=#{filenum}</if>
+		</trim>
+		where num = #{num}
+	</update>
+	
+	<update id="updateBrdViewCnt">
+		<![CDATA[
+		update board set viewcount = viewcount+1 where num=#{num}
+		]]>
+	</update>
+	
+	<delete id="deleteFile" parameterType="Integer">
+		<![CDATA[
+			delete from file where num = #{num}
+		]]>
+	</delete>
+</mapper>
