@@ -66,11 +66,7 @@
 					<div class="column">${acc.name }</div>
 					<div class="column">${acc.balance }</div>
 					<div class="column">${acc.type }</div>
-					<div class="column">
-						<c:if test='${acc.grade eq Empty }'>
-                			${acc.grade }
-                		</c:if>
-					</div>
+					<div class="column">${acc.grade }</div>
 				</div>
 			</c:forEach>
 		</div>
