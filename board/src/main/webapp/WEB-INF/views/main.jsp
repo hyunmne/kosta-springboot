@@ -20,7 +20,7 @@
 </head>
 <body>
 <div id="header">
-<img src="${path }/resources/image/logo.png" width="100px" height="100px">&nbsp;
+<img src="resources/image/logo.png" width="100px" height="100px">&nbsp;
 <c:choose>
 	<c:when test="${nickname ne Empty}">
 		<b>${nickname }</b>&nbsp;&nbsp;<img src="${thumnail }" width="30px" height="30px" />&nbsp;&nbsp;<a href="logout" class="a">로그아웃</a>
