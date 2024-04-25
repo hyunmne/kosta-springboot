@@ -44,7 +44,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping("/memberDoubleId")
-	public String MemberDoubleId(String id) {
+	public String memberDoubleId(String id) {
 		try {
 			Boolean check = memService.doubleMemberCheckId(id);
 			return String.valueOf(check);

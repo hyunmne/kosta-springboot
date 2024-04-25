@@ -31,14 +31,35 @@
 					id : $('#id').val()
 				}, // 사용자가 입력한 값(id)를 받아옴
 				success : function(result) {
-					if (result == 'true') {
+					if (result == "true") {
 						alert("아이디가 중복됩니다.");
+					} else if(result=="false") {
+						alert("사용 가능한 아이디입니다.");
 					} else {
-						alert("사용 가능한 아이디입니다.")
+						alert("아이디 중복 체크 오류");
 					}
-				},
-				error : function(result) {
-					alert("아이디 중복 체크 오류");
+				}
+			})
+		})
+		
+		$('#doubleNickName').click(function(e) {
+			e.preventDefault();
+			$.ajax({
+				url : 'memberDoubleNickName', // 보내는 url
+				type : 'post', // doPost 방식
+				async : true,
+				dataType : 'text',
+				data : {
+					nickname : $('#nickname').val()
+				}, // 사용자가 입력한 값(id)를 받아옴
+				success : function(result) {
+					if (result == "true") {
+						alert("닉네임이 중복됩니다.");
+					} else if(result=="false") {
+						alert("사용 가능한 닉네임입니다.");
+					} else {
+						alert("닉네임 중복 체크 오류");
+					}
 				}
 			})
 		})
@@ -77,7 +98,7 @@
 	<div class="header">
 		<h3>회원가입</h3>
 	</div>
-	<form action="memberJoin" method="post" class="container">
+	<form action="join" method="post" class="container">
 		<table border="1">
 			<tr>
 				<th>아이디</th>
@@ -91,6 +112,11 @@
 			<tr>
 				<th>비밀번호</th>
 				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<th>닉네임</th>
+				<td><input type="text" name="nickname" id="nickname">
+					<button id="doubleNickName">중복</button></td>
 			</tr>
 			<tr>
 				<th>이메일</th>

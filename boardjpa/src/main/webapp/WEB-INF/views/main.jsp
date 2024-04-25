@@ -20,20 +20,20 @@
 </head>
 <body>
 <div id="header">
-<img src="resources/image/logo.png" width="100px" height="100px">&nbsp;
+<img src="/resources/image/logo.png" width="100px" height="100px">&nbsp;
 <c:choose>
 	<c:when test="${nickname ne Empty}">
-		<b>${nickname }</b>&nbsp;&nbsp;<img src="${thumnail }" width="30px" height="30px" />&nbsp;&nbsp;<a href="logout" class="a">로그아웃</a>
+		<b>${nickname }</b>&nbsp;&nbsp;<a href="${path }/logout" class="a">로그아웃</a>
 	</c:when>
 	<c:when test="${user ne Empty}">
-		<b>${user}</b>&nbsp;&nbsp;<a href="logout" class="a">로그아웃</a>
+		<b>${user}</b>&nbsp;&nbsp;<a href="${path }/logout" class="a">로그아웃</a>
 	</c:when>
 	<c:otherwise>
-		<a href="login" class="a">로그인</a>
+		<a href="${path }/login" class="a">로그인</a>
 	</c:otherwise>
 </c:choose>&nbsp;&nbsp;&nbsp;
-<a href="join" class="a">회원가입</a>&nbsp;&nbsp;&nbsp;
-<a href="boardList" class="a">게시판목록</a><br><br>
+<a href="${path }/join" class="a">회원가입</a>&nbsp;&nbsp;&nbsp;
+<a href="${path }/boardList" class="a">게시판목록</a><br><br>
 </div>
 </body>
 </html>
