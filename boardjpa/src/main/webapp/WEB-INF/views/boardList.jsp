@@ -76,10 +76,12 @@ function submit(page) {
 		<c:forEach items="${brdList }" var="board">
 			<tr style="text-align:center;">
 				<td>${board.num }</td>
-				<td style="width:300px; text-align:left"><a href="boardDetail?num=${board.num }">${board.subject }</a></td>
+				<td style="width:300px; text-align:left">
+					<a href="boardDetail/${board.num }">${board.subject }</a>
+				</td>
 				<td>${board.writer }</td>
-				<td>${board.writedate }</td>
-				<td>${board.viewcount }</td>
+				<td>${board.writeDate }</td>
+				<td>${board.viewCount }</td>
 			</tr>
 		</c:forEach>
 	</table>

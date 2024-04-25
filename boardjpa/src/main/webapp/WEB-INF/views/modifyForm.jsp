@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@ table {
 <jsp:include page="main.jsp"/>
 	<section id="./writeForm">
 		<h2>게시판 글 수정</h2>
-		<form action="boardModify" method="post" enctype="multipart/form-data">
+		<form action="${path }/boardModify" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="num" value="${board.num }" />
 			<table>
 				<tr>
@@ -66,10 +67,10 @@ table {
 					<td><textarea id="content" name="content" cols="40" rows="15"
 							required="required">${board.content }</textarea></td>
 				</tr>
-				<c:if test="${board.filenum ne null  }">
+				<c:if test="${board.fileNum ne null  }">
 					<tr>
 						<td class="td_left"><label>이미지</label></td>
-						<td class="td_right"><img src="image?num=${board.filenum }" id="image-box"
+						<td class="td_right"><img src="${path }/image/${board.fileNum }" id="image-box"
 							width="100px" /></td>
 					</tr>
 				</c:if>

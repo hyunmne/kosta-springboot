@@ -54,19 +54,19 @@
 			<td class="td_left"><label>내용</label></td>
 			<td class="td_right"><div id="content">${brd.content }</div></td>
 		</tr>
-		<c:if test="${brd.filenum ne null  }">
+		<c:if test="${brd.fileNum ne null  }">
 			<tr>
 				<td class="td_left"><label>이미지</label></td>
-				<td class="td_right"><img src="image?num=${brd.filenum }" width="100px" /></td>
+				<td class="td_right"><img src="${path }/image/${brd.fileNum }" width="100px" /></td>
 			</tr>
 		</c:if>
 	</table>
 	
 	<div id="commandCell">
 		<c:if test="${user eq brd.writer }">
-			<a href="boardModify?num=${brd.num }">수정</a>&nbsp;&nbsp;&nbsp; 
+			<a href="${path }/boardModify/${brd.num }">수정</a>&nbsp;&nbsp;&nbsp; 
 		</c:if>
-		<a href="boardList">목록</a>&nbsp;&nbsp;&nbsp;
+		<a href="${path }/boardList">목록</a>&nbsp;&nbsp;&nbsp;
 		<c:if test="${user ne Empty }">
 			<c:choose>
 				<c:when test="${like eq 'true' }">
