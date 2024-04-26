@@ -37,4 +37,7 @@ public class Member {
 	
 	@OneToMany(mappedBy="member", fetch=FetchType.LAZY) // 일대다 관계 (DB 관계 설정), 선택적
 	private List<Board> boardList = new ArrayList<>();
+	
+	@OneToMany(mappedBy="member", fetch=FetchType.LAZY) // 일대다 관계 (DB 관계 설정), 선택적
+	private List<BoardLike> boardLikeList = new ArrayList<>();
 }

@@ -1,6 +1,8 @@
 package com.kosta.board.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.kosta.board.dto.BoardDto;
 
@@ -56,12 +59,15 @@ public class Board {
 	private Date writeDate;
 	
 	@Column
-	@LastModifiedDate // 수정 날짜? 
+	@UpdateTimestamp // 수정 날짜? 
 	private Date modifyDate;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="writer")
 	private Member member;
+	
+	@OneToMany(mappedBy="board",  fetch = FetchType.LAZY)
+	private List<BoardLike> boardLikeList = new ArrayList<>();
 	
 	public BoardDto toBoardDto() {
 		return BoardDto.builder()
@@ -74,7 +80,8 @@ public class Board {
 				.writeDate(writeDate)
 				.modifyDate(modifyDate)
 				.writer(member.getId())
-				.nickname(member.getNickname()).build();
+				.nickname(member.getNickname())
+				.build();
 				
 	}
 }
