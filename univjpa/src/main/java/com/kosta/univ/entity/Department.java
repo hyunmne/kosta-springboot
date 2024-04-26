@@ -32,7 +32,7 @@ public class Department {
 	@Column
 	private String dname;
 	@Column
-	private Integer part;
+	private String part;
 	@Column
 	private String build;
 	
