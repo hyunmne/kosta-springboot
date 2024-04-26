@@ -60,7 +60,7 @@ public class Professor {
 	@JoinColumn(name="deptno")
 	private Department department;
 	
-	@OneToMany(mappedBy="profno", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="professor", fetch=FetchType.LAZY)
 	private List<Student> stdList = new ArrayList<>();
 	
 }

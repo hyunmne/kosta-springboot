@@ -36,12 +36,12 @@ public class Department {
 	@Column
 	private String build;
 	
-	@OneToMany(mappedBy="deptno1", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="department1", fetch=FetchType.LAZY)
 	private List<Student> stdList1 = new ArrayList<>();
 	
-	@OneToMany(mappedBy="deptno2", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="department2", fetch=FetchType.LAZY)
 	private List<Student> stdList2 = new ArrayList<>();
 	
-	@OneToMany(mappedBy="deptno", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="department", fetch=FetchType.LAZY)
 	private List<Professor> profList = new ArrayList<>();
 }

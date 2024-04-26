@@ -47,8 +47,6 @@ public class Student {
 	private Integer height;
 	@Column
 	private Integer weight;
-	@Column
-	private Integer profno;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="profno")
