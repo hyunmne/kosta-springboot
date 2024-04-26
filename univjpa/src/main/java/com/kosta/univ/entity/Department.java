@@ -41,4 +41,7 @@ public class Department {
 	
 	@OneToMany(mappedBy="deptno2", fetch=FetchType.LAZY)
 	private List<Student> stdList2 = new ArrayList<>();
+	
+	@OneToMany(mappedBy="deptno", fetch=FetchType.LAZY)
+	private List<Professor> profList = new ArrayList<>();
 }
