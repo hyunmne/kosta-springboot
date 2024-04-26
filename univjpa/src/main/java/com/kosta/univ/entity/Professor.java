@@ -33,7 +33,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Professor {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer profno;
 
 	@Column

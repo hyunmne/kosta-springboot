@@ -28,7 +28,6 @@ import lombok.ToString;
 @ToString
 public class Student {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer studno;
 	
 	@Column

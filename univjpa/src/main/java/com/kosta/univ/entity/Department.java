@@ -27,7 +27,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Department {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deptno;
 	@Column
 	private String dname;
