@@ -47,15 +47,13 @@ table {
 <jsp:include page="main.jsp"/>
 	<section id="./writeForm">
 		<h2>게시판 글 수정</h2>
-		<form action="${path }/boardModify" method="post" enctype="multipart/form-data">
+		<form action="/boardModify" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="writer" value="${user }" />
 		<input type="hidden" name="num" value="${board.num }" />
+		<input type="hidden" name="viewCount" value="${board.viewCount }" />
+		<input type="hidden" name="likeCount" value="${board.likeCount }" />
+		<input type="hidden" name="writeDate" value="${board.writeDate }" />
 			<table>
-				<tr>
-					<td class="td_left"><label for="writer">글쓴이</label></td>
-					<td class="td_right">
-						<input type="text" name="writer" readonly="readonly" id="writer" value="${board.writer }" />
-					</td>
-				</tr>
 				<tr>
 					<td class="td_left"><label for="subject">제목</label></td>
 					<td class="td_right">

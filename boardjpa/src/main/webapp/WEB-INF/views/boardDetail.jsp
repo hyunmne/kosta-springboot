@@ -21,15 +21,17 @@
 	$(function() {
 		$('#like').click(function(){
 			$.ajax({
-				url:'boardLike',
+				url:'/boardLike',
 				type:'post',
 				async:true,
 				data:{like:JSON.stringify({memberId:"${user}", boardNum:"${brd.num}"})},
 				success:function(result){
 					if(result=='true') {
 						$('#like').attr("src", "${path}/resources/image/redheart.png")
-					} else {
+					} else if(result=='false'){
 						$('#like').attr("src", "${path}/resources/image/blackheart.png")
+					} else {
+						alert("좋아요 오류")
 					}
 				}
 			})
