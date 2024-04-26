@@ -25,7 +25,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class Student {
 	@Id
 	private Integer studno;
@@ -39,7 +38,7 @@ public class Student {
 	@Column
 	private String jumin;
 	@Column
-	private Date birhtday;
+	private Date birthday;
 	@Column
 	private String tel;
 	@Column
@@ -58,4 +57,12 @@ public class Student {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="deptno2")
 	private Department department2;
+	
+	@Override
+	public String toString() {
+		return "Student [studno=" + studno + ", name=" + name + ", id=" + id + ", grade=" + grade + ", jumin=" + jumin
+				+ ", birthday=" + birthday + ", tel=" + tel + ", height=" + height + ", weight=" + weight
+				+ ", professor=" + professor + ", department1=" + department1 + ", department2=" + department2 + "]";
+	}
+	
 }

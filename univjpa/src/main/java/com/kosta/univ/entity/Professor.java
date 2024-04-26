@@ -28,7 +28,6 @@ import lombok.ToString;
 @Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Professor {

@@ -6,23 +6,21 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.kosta.univ.dto.DepartmentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Department {
@@ -38,9 +36,23 @@ public class Department {
 	@OneToMany(mappedBy="department1", fetch=FetchType.LAZY)
 	private List<Student> stdList1 = new ArrayList<>();
 	
-	@OneToMany(mappedBy="department2", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="department2", fetch=FetchType.EAGER)
 	private List<Student> stdList2 = new ArrayList<>();
 	
 	@OneToMany(mappedBy="department", fetch=FetchType.LAZY)
 	private List<Professor> profList = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return String.format("[%d,%s,%s,%s]", deptno, dname, part, build);
+	}
+	
+	public DepartmentDto toDto() {
+		return DepartmentDto.builder()
+				.deptno(deptno)
+				.dname(dname)
+				.part(part)
+				.build(build)
+				.build();
+	}
 }
