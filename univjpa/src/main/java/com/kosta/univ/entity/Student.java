@@ -46,23 +46,24 @@ public class Student {
 	@Column
 	private Integer weight;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="profno")
 	private Professor professor;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="deptno1")
 	private Department department1;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="deptno2")
 	private Department department2;
-	
+
 	@Override
 	public String toString() {
 		return "Student [studno=" + studno + ", name=" + name + ", id=" + id + ", grade=" + grade + ", jumin=" + jumin
-				+ ", birthday=" + birthday + ", tel=" + tel + ", height=" + height + ", weight=" + weight
-				+ ", professor=" + professor + ", department1=" + department1 + ", department2=" + department2 + "]";
+				+ ", birthday=" + birthday + ", tel=" + tel + ", height=" + height + ", weight=" + weight + "]";
 	}
+	
+
 	
 }

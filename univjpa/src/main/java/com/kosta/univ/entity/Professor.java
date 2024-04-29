@@ -58,7 +58,13 @@ public class Professor {
 	@JoinColumn(name="deptno")
 	private Department department;
 	
-	@OneToMany(mappedBy="professor", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="professor", fetch=FetchType.EAGER)
 	private List<Student> stdList = new ArrayList<>();
-	
+
+	@Override
+	public String toString() {
+		return "Professor [profno=" + profno + ", name=" + name + ", id=" + id + ", position=" + position + ", pay="
+				+ pay + ", hiredate=" + hiredate + ", bonus=" + bonus + ", email=" + email + ", hpage=" + hpage
+				+ ", department=" + department + "]";
+	}	
 }
