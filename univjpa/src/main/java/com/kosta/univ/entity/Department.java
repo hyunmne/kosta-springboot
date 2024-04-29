@@ -44,7 +44,8 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return String.format("[%d,%s,%s,%s]", deptno, dname, part, build);
+		return "Department [deptno=" + deptno + ", dname=" + dname + ", part=" + part + ", build=" + build
+				+ ", profList=" + profList + "]";
 	}
 	
 	public DepartmentDto toDto() {
