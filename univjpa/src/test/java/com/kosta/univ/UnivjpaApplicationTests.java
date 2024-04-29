@@ -94,5 +94,16 @@ class UnivjpaApplicationTests {
 			System.out.println(odept2.get().getStdList2());
 		}
 	}
+	
+	// 조인형 교수 정보 & 이 교수를 담당교수로 하는 학생 목록 조회
+	@Test
+	void selectStdListByProfName() {
+		Optional<Professor> oprof = profRepository.findByName("조인형");
+		if(oprof.isPresent()) {
+			System.out.println(oprof.get());
+			System.out.println(oprof.get().getStdList());
+		}
+	}
+	
 
 }
