@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.modelmapper.ModelMapper;
+
+import com.kosta.univ.dto.ProfessorDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -67,4 +70,12 @@ public class Professor {
 				+ pay + ", hiredate=" + hiredate + ", bonus=" + bonus + ", email=" + email + ", hpage=" + hpage
 				+ ", department=" + department + "]";
 	}	
+	
+	public ProfessorDto toDto() {
+		ModelMapper mapper = new ModelMapper();
+		ProfessorDto profDto = mapper.map(this, ProfessorDto.class);
+		profDto.setDeptno(department.getDeptno());
+		profDto.setDeptName(department.getDname());
+		return profDto;
+	}
 }
