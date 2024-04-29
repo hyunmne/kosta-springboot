@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,7 @@ import com.kosta.univ.entity.Student;
 import com.kosta.univ.repository.DepartmentRepository;
 import com.kosta.univ.repository.ProfessorRepository;
 import com.kosta.univ.repository.StudentRepository;
+import com.kosta.univ.service.UnivService;
 
 @SpringBootTest
 class UnivjpaApplicationTests {
@@ -97,11 +100,158 @@ class UnivjpaApplicationTests {
 	
 	// 조인형 교수 정보 & 이 교수를 담당교수로 하는 학생 목록 조회
 	@Test
+	@Transactional
 	void selectStdListByProfName() {
-		Optional<Professor> oprof = profRepository.findByName("조인형");
-		if(oprof.isPresent()) {
-			System.out.println(oprof.get());
-			System.out.println(oprof.get().getStdList());
+		List<Professor> oprof = profRepository.findByName("조인형");
+		for(Professor prof : oprof) {
+			System.out.println(prof);
+			System.out.println(prof.getStdList());
+		}
+	}
+	
+	@Autowired
+	private UnivService univService;
+	
+	@Test
+	void stdListByName() {
+		try {
+			List<Student> stdList = univService.stdListByName("서재수");
+			System.out.println(stdList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@Transactional
+	void stdListInDept1ByDeptName() {
+		try {
+			List<Student> stdList = univService.stdListInDept1ByDeptName("컴퓨터공학부");
+			System.out.println(stdList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void stdListInDept2ByDeptNo() {
+		try {
+			List<Student> stdList = univService.stdListInDept2ByDeptNo(201);
+			System.out.println(stdList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void stdListByNoProf() {
+		try {
+			List<Student> stdList = univService.stdListByNoProf();
+			System.out.println(stdList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void stdByStudno() {
+		try {
+//			Student stud = univService.stdByStudNo(9411);
+			System.out.println(univService.stdByStudNo(9411));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void stdByJumin() {
+		try {
+			System.out.println(univService.stdByJumin("7502241128467"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@Transactional
+	void stdListByProfNo() {
+		try {
+			System.out.println(univService.stdListByProfNo(1001));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	@Transactional
+	void profByProfNo() {
+		try {
+			System.out.println(univService.profByProfNo(1001));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void profListByProfName() {
+		try {
+			System.out.println(univService.profListByProfName("조인형"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void profListByDeptNo() {
+		try {
+			System.out.println(univService.profListByDeptNo(101));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void profListByDeptName() {
+		try {
+			System.out.println(univService.profListByDeptName("컴퓨터공학부"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void profListByPosition() {
+		try {
+			System.out.println(univService.profListByPosition("정교수"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void deptByDeptName() {
+		try {
+			System.out.println(univService.deptByDeptName("전자공학과"));
+		} catch(Exception e) {
+			
+		}
+	}
+	
+	@Test
+	void deptListByPart() {
+		try {
+			System.out.println(univService.deptListByPart("공과대학"));
+		} catch(Exception e) {
+			
+		}
+	}
+	
+	@Test
+	void deptListByBuild() {
+		try {
+			System.out.println(univService.deptListByBuild("전자제어관"));
+		} catch(Exception e) {
+			
 		}
 	}
 	
