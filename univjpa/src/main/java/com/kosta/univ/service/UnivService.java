@@ -23,7 +23,7 @@ public interface UnivService {
 	List<StudentDto> stdListInDept1ByDeptName(String dept1) throws Exception;
 	List<StudentDto> stdListInDept1ByDeptNo(Integer dept1) throws Exception;
 	// 제 2전공으로 학생 목록 조회
-	List<StudentDto> stdListInDeptByDeptName(String dept2) throws Exception;
+	List<StudentDto> stdListInDept2ByDeptName(String dept2) throws Exception;
 	List<StudentDto> stdListInDept2ByDeptNo(Integer dept2) throws Exception;
 	// 학년으로 학생 목록 조회
 	List<StudentDto> stdListByGrade(Integer grade) throws Exception;

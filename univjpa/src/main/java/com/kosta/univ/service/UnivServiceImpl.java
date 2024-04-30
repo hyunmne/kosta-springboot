@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.kosta.univ.dto.ConvertMapper;
 import com.kosta.univ.dto.DepartmentDto;
 import com.kosta.univ.dto.ProfessorDto;
 import com.kosta.univ.dto.StudentDto;
@@ -33,77 +34,51 @@ public class UnivServiceImpl implements UnivService {
 
 	@Override  //학생 이름으로 학생목록 조회
 	public List<StudentDto> stdListByName(String studName) throws Exception {
-		List<StudentDto> studDtoList = new ArrayList<>();
 		List<Student> studList = studentRepository.findByName(studName);
-		for (Student std : studList) {
-			studDtoList.add(std.toDto());
-		}
-		return studDtoList;
+		return ConvertMapper.stdListToStdDtoList(studList);
 	}
 
 	@Override  //제1전공으로 학생목록 조회
 	public List<StudentDto> stdListInDept1ByDeptName(String deptName) throws Exception {
 		Optional<Department> odept = departmentRepository.findByDname(deptName);
-		List<StudentDto> stdDtoList = null;
 		if(odept.isPresent()) {
-				stdDtoList = new ArrayList<>();
-			for(Student std : odept.get().getStdList1()) {
-				stdDtoList.add(std.toDto());
-			}
+			return ConvertMapper.stdListToStdDtoList(odept.get().getStdList1());
 		}
-		return stdDtoList;
+		return null;
 	}
 
 	@Override
 	public List<StudentDto> stdListInDept1ByDeptNo(Integer deptNo) throws Exception {
-		List<StudentDto> stdDtoList = new ArrayList<StudentDto>();
 		List<Student> stdList = studentRepository.findByDepartment1Deptno(deptNo);
-		for (Student std : stdList) {
-			stdDtoList.add(std.toDto());
-		}
-		return stdDtoList;
+		return ConvertMapper.stdListToStdDtoList(stdList);
 	}
 
 	@Override  //제2전공으로 학생목록 조회
-	public List<StudentDto> stdListInDeptByDeptName(String deptName) throws Exception {
+	public List<StudentDto> stdListInDept2ByDeptName(String deptName) throws Exception {
 		Optional<Department> odept = departmentRepository.findByDname(deptName);
 		if(odept.isPresent()) {
-			List<StudentDto> stdDtoList = new ArrayList<>();
-			for (Student std : odept.get().getStdList2()) {
-				stdDtoList.add(std.toDto());
-			}
+			List<Student> stdList = odept.get().getStdList2();
+			return ConvertMapper.stdListToStdDtoList(stdList);
 		}
 		return null;
 	}
 
 	@Override
 	public List<StudentDto> stdListInDept2ByDeptNo(Integer deptNo) throws Exception {
-		List<StudentDto> stdDtoList = new ArrayList<StudentDto>();
 		List<Student> stdList = studentRepository.findByDepartment2Deptno(deptNo);
-		for (Student std : stdList) {
-			stdDtoList.add(std.toDto());
-		}
-		return stdDtoList;
+		return ConvertMapper.stdListToStdDtoList(stdList);
 	}
 
 	@Override  //학년으로 학생목록 조회
 	public List<StudentDto> stdListByGrade(Integer grade) throws Exception {
-		List<StudentDto> stdDtoList = new ArrayList<StudentDto>();
 		List<Student> stdList = studentRepository.findByGrade(grade);
-		for (Student std : stdList) {
-			stdDtoList.add(std.toDto());
-		}
-		return stdDtoList;
+		return ConvertMapper.stdListToStdDtoList(stdList);
 	}
 
 	@Override  //담당교수가 없는 학생목록 조회
 	public List<StudentDto> stdListByNoProf() throws Exception {
-		List<StudentDto> stdDtoList = new ArrayList<StudentDto>();
 		List<Student> stdList = studentRepository.findByProfessorIsNull();
-		for (Student std : stdList) {
-			stdDtoList.add(std.toDto());
-		}
-		return stdDtoList;
+		return ConvertMapper.stdListToStdDtoList(stdList);
 	}
 
 	@Override  //학번으로 학생 조회
@@ -124,10 +99,8 @@ public class UnivServiceImpl implements UnivService {
 	public List<StudentDto> stdListByProfNo(Integer profNo) throws Exception {
 		Optional<Professor> oprof = professorRepository.findById(profNo);
 		if(oprof.isPresent()) {
-			List<StudentDto> stdDtoList = new ArrayList<>();
-			for (Student std : oprof.get().getStdList()) {
-				stdDtoList.add(std.toDto());
-			}
+			List<Student> stdList = oprof.get().getStdList();
+			return ConvertMapper.stdListToStdDtoList(stdList);
 		}
 		return null;
 	}
@@ -141,22 +114,16 @@ public class UnivServiceImpl implements UnivService {
 
 	@Override
 	public List<ProfessorDto> profListByProfName(String profName) throws Exception {
-		List<ProfessorDto> profDtoList = new ArrayList<>();
 		List<Professor> profList = professorRepository.findByName(profName);
-		for(Professor prof : profList) {
-			profDtoList.add(prof.toDto());
-		}
-		return profDtoList;
+		return ConvertMapper.profListToProfDtoList(profList);
 	}
 
 	@Override // 학과번호으로 교수 리스트 조회
 	public List<ProfessorDto> profListByDeptNo(Integer deptno) throws Exception {
 		Optional<Department> odept = departmentRepository.findById(deptno);
 		if(odept.isPresent()) {
-			List<ProfessorDto> profDtoList = new ArrayList<>();
-			for(Professor prof : odept.get().getProfList()) {
-				profDtoList.add(prof.toDto());
-			}
+			List<Professor> profList = odept.get().getProfList();
+			return ConvertMapper.profListToProfDtoList(profList);
 		}
 		return null;
 	}
@@ -165,22 +132,16 @@ public class UnivServiceImpl implements UnivService {
 	public List<ProfessorDto> profListByDeptName(String deptName) throws Exception {
 		Optional<Department> odept = departmentRepository.findByDname(deptName);
 		if(odept.isPresent()) {
-			List<ProfessorDto> profDtoList = new ArrayList<>();
-			for(Professor prof : odept.get().getProfList()) {
-				profDtoList.add(prof.toDto());
-			}
+			List<Professor> profList =odept.get().getProfList();
+			return ConvertMapper.profListToProfDtoList(profList);
 		}
 		return null;
 	}
 
 	@Override
 	public List<ProfessorDto> profListByPosition(String position) throws Exception {
-		List<ProfessorDto> profDtoList = new ArrayList<ProfessorDto>();
 		List<Professor> profList = professorRepository.findByPosition(position);
-		for(Professor prof : profList) {
-			profDtoList.add(prof.toDto());
-		}
-		return profDtoList;
+		return ConvertMapper.profListToProfDtoList(profList);
 	}
 
 	@Override
@@ -199,22 +160,14 @@ public class UnivServiceImpl implements UnivService {
 
 	@Override
 	public List<DepartmentDto> deptListByPart(String part) throws Exception {
-		List<DepartmentDto> deptDtoList = new ArrayList<>();
 		List<Department> deptList = departmentRepository.findByPart(part);
-		for(Department dept : deptList) {
-			deptDtoList.add(dept.toDto());
-		}
-		return deptDtoList; 
+		return ConvertMapper.deptListToDeptDtoList(deptList);
 	}
 
 	@Override
 	public List<DepartmentDto> deptListByBuild(String build) throws Exception {
-		List<DepartmentDto> deptDtoList = new ArrayList<>();
 		List<Department> deptList = departmentRepository.findByBuild(build);
-		for(Department dept : deptList) {
-			deptDtoList.add(dept.toDto());
-		}
-		return deptDtoList; 
+		return ConvertMapper.deptListToDeptDtoList(deptList);
 	}
 
 	@Override
