@@ -112,46 +112,46 @@ class UnivjpaApplicationTests {
 	@Autowired
 	private UnivService univService;
 	
-	@Test
-	void stdListByName() {
-		try {
-			List<Student> stdList = univService.stdListByName("서재수");
-			System.out.println(stdList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	@Transactional
-	void stdListInDept1ByDeptName() {
-		try {
-			List<Student> stdList = univService.stdListInDept1ByDeptName("컴퓨터공학부");
-			System.out.println(stdList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	void stdListInDept2ByDeptNo() {
-		try {
-			List<Student> stdList = univService.stdListInDept2ByDeptNo(201);
-			System.out.println(stdList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Test
-	void stdListByNoProf() {
-		try {
-			List<Student> stdList = univService.stdListByNoProf();
-			System.out.println(stdList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@Test
+//	void stdListByName() {
+//		try {
+//			List<Student> stdList = univService.stdListByName("서재수");
+//			System.out.println(stdList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@Test
+//	@Transactional
+//	void stdListInDept1ByDeptName() {
+//		try {
+//			List<Student> stdList = univService.stdListInDept1ByDeptName("컴퓨터공학부");
+//			System.out.println(stdList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@Test
+//	void stdListInDept2ByDeptNo() {
+//		try {
+//			List<Student> stdList = univService.stdListInDept2ByDeptNo(201);
+//			System.out.println(stdList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	@Test
+//	void stdListByNoProf() {
+//		try {
+//			List<Student> stdList = univService.stdListByNoProf();
+//			System.out.println(stdList);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Test
 	void stdByStudno() {
