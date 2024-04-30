@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Setter;
-import lombok.ToString;
+import com.kosta.bank.dto.MemberDto;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Member {
 	@Id
 	private String id;
@@ -27,4 +31,15 @@ public class Member {
 	private String email;
 	@Column
 	private String address;
+
+	public MemberDto toMemberDto() {
+		return MemberDto.builder()
+					    .id(id)
+					    .name(name)
+					    .password(password)
+					    .email(email)
+					    .address(address)
+					    .build();
+				
+	}
 }

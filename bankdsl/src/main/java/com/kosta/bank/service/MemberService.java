@@ -5,6 +5,6 @@ import com.kosta.bank.entity.Member;
 
 public interface MemberService {
 	void join(MemberDto mem) throws Exception;
-	void login(String id, String password) throws Exception; 
+	MemberDto login(String id, String password) throws Exception; 
 	Boolean doubleMemberCheckId(String id) throws Exception;
 }
