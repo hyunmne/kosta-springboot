@@ -80,6 +80,8 @@ public class UnivController {
 		}
 	}
 	
+	// 여기서부터 과제 
+	
 	@GetMapping("/deptInfoByName") // 학과명으로 학과 조회
 	public ResponseEntity<DepartmentDto> deptInfoByName(@RequestParam("dname") String dname){
 		try {
@@ -160,7 +162,7 @@ public class UnivController {
 	@GetMapping("/studInDeptName2") // 학과명에 소속된 학생 조회(부전공)
 	public ResponseEntity<List<StudentDto>> studInDeptName2(@RequestParam("dname") String dname){
 		try {
-			List<StudentDto> stdDtoList = univService.stdListInDeptByDeptName(dname);
+			List<StudentDto> stdDtoList = univService.stdListInDept2ByDeptName(dname);
 			return new ResponseEntity<List<StudentDto>>(stdDtoList,HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -180,16 +182,6 @@ public class UnivController {
 			return new ResponseEntity<List<StudentDto>> (HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-//	@GetMapping("/studInProfName") // 교수이름에 소속된 학생 조회
-//	public ResponseEntity<List<StudentDto>> studInProfName(@RequestParam("name") String profName){
-//		try {
-//			List<StudentDto> stdDtoList = univService.stdListByNoProf()
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			return new ResponseEntity<List<StudentDto>> (HttpStatus.BAD_REQUEST);
-//		}
-//	}
 	
 	@GetMapping("/profInfoByNo") // 교수번호로 교수 조회
 	public ResponseEntity<ProfessorDto> profInfoByNo(@RequestParam("profno") Integer profno){
@@ -225,9 +217,9 @@ public class UnivController {
 	}
 	
 	@GetMapping("/profInDeptName") // 학과 이름에 소속된 교수 조회
-	public ResponseEntity<List<ProfessorDto>> profInDeptName(@RequestParam("name") String name){
+	public ResponseEntity<List<ProfessorDto>> profInDeptName(@RequestParam("dname") String dname){
 		try {
-			List<ProfessorDto> profDto = univService.profListByDeptName(name);
+			List<ProfessorDto> profDto = univService.profListByDeptName(dname);
 			return new ResponseEntity<List<ProfessorDto>>(profDto, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
