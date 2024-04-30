@@ -65,8 +65,6 @@ public class Board {
 	@Column
 	private String writer;
 	
-	@OneToMany(mappedBy="board",  fetch = FetchType.LAZY)
-	private List<BoardLike> boardLikeList = new ArrayList<>();
 	
 	public BoardDto toBoardDto() {
 		return BoardDto.builder()

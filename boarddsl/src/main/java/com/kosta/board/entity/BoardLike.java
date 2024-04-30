@@ -33,9 +33,4 @@ public class BoardLike {
 	@Column
 	private Integer boardNum;
 
-	@Override
-	public String toString() {
-		return "BoardLike [num=" + num + ", memberId=" + memberId + ", boardNum=" + boardNum + "]";
-	}
-
 }
