@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosta.bank.dto.AccountDto;
@@ -21,6 +22,7 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accService;
+	
 	
 	@GetMapping("/makeAccount")
 	public String makeAccount() {
@@ -133,5 +135,15 @@ public class AccountController {
 		return mav;
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/accountDoubleId")
+	public String accountDoubldId(@RequestParam("id") String id) {
+		try {
+			Boolean check = accService.checkAccountDoubleId(id);
+			return String.valueOf(check);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "none";
+		}
+	}
 }
