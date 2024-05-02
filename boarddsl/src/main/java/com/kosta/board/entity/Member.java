@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.kosta.board.dto.MemberDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +30,14 @@ public class Member {
 	@Column
 	private String address;
 	
+	public MemberDto toDto() {
+		return MemberDto.builder()
+				        .id(id)
+				        .name(name)
+				        .nickname(nickname)
+				        .password(password)
+				        .email(email)
+				        .address(address)
+				        .build();
+	}
 }
