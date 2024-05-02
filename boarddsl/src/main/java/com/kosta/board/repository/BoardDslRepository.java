@@ -2,12 +2,16 @@ package com.kosta.board.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.kosta.board.entity.Board;
+import com.kosta.board.entity.BoardLike;
 import com.kosta.board.entity.QBoard;
+import com.kosta.board.entity.QBoardLike;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Repository
@@ -87,4 +91,24 @@ public class BoardDslRepository {
 			
 		} else return 0L;
 	}
+
+	// ㅈ회수
+	@Transactional
+	public void setViewCnt(Integer boardNum, Integer viewCount) {
+		QBoard brd = QBoard.board;
+		jpaQueryFactory.update(brd)
+					   .set(brd.viewCount, viewCount)
+					   .where(brd.num.eq(boardNum)) // eq = 같을 때 ? 
+					   .execute();
+		
+	}
+	
+	public BoardLike findBoardLike(String id, Integer num) {
+		QBoardLike brdLike = QBoardLike.boardLike;
+		return jpaQueryFactory.selectFrom(brdLike)
+							  .where(brdLike.memberId.eq(id).and(brdLike.boardNum.eq(num)))
+							  .fetchOne();
+	}
+	
+	
 }
