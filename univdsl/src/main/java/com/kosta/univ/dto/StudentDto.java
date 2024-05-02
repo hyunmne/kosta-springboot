@@ -21,7 +21,7 @@ public class StudentDto {
 	private String tel;
 	private Integer height;
 	private Integer weight;
-	private Integer dpetno1;
-	private Integer dpetno2;
+	private Integer deptno1;
+	private Integer deptno2;
 	private Integer profno;
 }

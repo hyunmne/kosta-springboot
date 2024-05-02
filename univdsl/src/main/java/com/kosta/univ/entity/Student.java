@@ -36,9 +36,9 @@ public class Student {
 	@Column
 	private Integer weight;
 	@Column
-	private Integer dpetno1;
+	private Integer deptno1;
 	@Column
-	private Integer dpetno2;
+	private Integer deptno2;
 	@Column
 	private Integer profno;
 	
