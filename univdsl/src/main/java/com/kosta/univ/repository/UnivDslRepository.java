@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosta.univ.entity.Department;
 import com.kosta.univ.entity.Professor;
 import com.kosta.univ.entity.QDepartment;
 import com.kosta.univ.entity.QProfessor;
@@ -151,13 +152,16 @@ public class UnivDslRepository {
 				              .fetch();
 	}
 	
-//	public Department findDeptByStudno(Integer studno) {
-//		QDepartment dept = QDepartment.department;
-//		QProfessor prof = QProfessor.professor;
-//		
-//		return jpaQueryFactory.selectFrom(prof)
-//				              .join(dept)
-//	}
+	public Department findDeptByStudno(Integer studno) {
+		QDepartment dept = QDepartment.department;
+		QStudent std = QStudent.student;
+		
+		return jpaQueryFactory.selectFrom(dept)
+				              .join(std)
+				              .on(std.deptno1.eq(dept.deptno))
+				              .where(std.studno.eq(studno))
+				              .fetchOne();
+	}
 
 	
 	

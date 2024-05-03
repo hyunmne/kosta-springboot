@@ -1,6 +1,7 @@
 package com.kosta.univ;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,18 @@ class UnivdslApplicationTests {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	void getProfByProfNoWithDeptNo() {
+		try {
+			Map<String, Object> map = uniservice.getProfByProfNoWithDeptNo(101);
+			System.out.println(map);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 

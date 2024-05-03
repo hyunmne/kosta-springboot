@@ -172,14 +172,14 @@ public class UnivServiceImpl implements UnivService {
 	public void enterProfessor(ProfessorDto prof) throws Exception {
 		Optional<Professor> oprof = profres.findById(prof.getProfno());
 		if(oprof.isPresent()) throw new Exception("교수번호 중복 오류");
-		stdres.save(modelMapper.map(oprof, Student.class)); // StudentDto => Student
+		stdres.save(modelMapper.map(oprof, Student.class)); 
 	}
 	
 	@Override // 교수번호로 교수정보 조회
 	public ProfessorDto getProfByProfNo(Integer profno) throws Exception {
 		Optional<Professor> oprof = profres.findById(profno);
 		if(oprof.isEmpty()) throw new Exception("학생번호 오류");
-		return modelMapper.map(oprof.get(), ProfessorDto.class);
+		return modelMapper.map(oprof.get(), ProfessorDto.class); // oprof를 DTO class로 변경
 	}
 	
 	@Override // 교수명으로 교수정보 조회
@@ -243,20 +243,23 @@ public class UnivServiceImpl implements UnivService {
 	
 	@Override // 학과명으로 학과 조회
 	public DepartmentDto getDeptByDName(String dname) throws Exception {
-		Department dept = deptres.findByDName(dname);
+		Department dept = deptres.findByDname(dname);
 		return modelMapper.map(dept, DepartmentDto.class);
 	}
 	
 	@Override // 학번으로 학과 조회
 	public DepartmentDto getDeptByStudno(Integer studno) throws Exception {
-//		Department dept = univres.findDeptByStudno(studno);
-		
-		return null;
+		Department dept = univres.findDeptByStudno(studno);
+		return modelMapper.map(dept, DepartmentDto.class);
 	}
 	
 	@Override // 건물로 학과 조회
 	public List<DepartmentDto> getDeptByBuild(String build) throws Exception {
-		return null;
+		List<Department> deptList = deptres.findByBuild(build);
+		
+		return deptList.stream()
+				.map(dept->modelMapper.map(dept, DepartmentDto.class))
+				.collect(Collectors.toList());
 	}
 	
 
