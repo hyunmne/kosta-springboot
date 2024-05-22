@@ -34,7 +34,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			// 결과적으로 컨트롤러에 따로 "/login"을 구현하지 않아도 괜찮다.
 			// 이 로그인 과정에서 필요한 것은 PrincipalDetails를 만둘어주는 것이다.
 			.loginProcessingUrl("/loginProc")
-			.defaultSuccessUrl("/"); // 로그인이 성공적으로 끝나면 리다이렉트할 url 
+			.defaultSuccessUrl("/") // 로그인이 성공적으로 끝나면 리다이렉트할 url
+			.and()
+			.oauth2Login()
+			.loginPage("/login")
+			.authorizationEndpoint()
+			.baseUri("/oauth2/authorization")
+			.and()
+			.redirectionEndpoint()
+			.baseUri("/oauth2/callback/*")
+			.and()
+			.userInfoEndpoint()
+			.userService(null);
 	}
 	
 	
