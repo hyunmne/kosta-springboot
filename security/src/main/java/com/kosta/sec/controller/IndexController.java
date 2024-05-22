@@ -61,7 +61,7 @@ public class IndexController {
 	@GetMapping("/manager")
 	@ResponseBody
 	public String manager() {
-		return "매니저입니다.입니다.";
+		return "매니저입니다.";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
