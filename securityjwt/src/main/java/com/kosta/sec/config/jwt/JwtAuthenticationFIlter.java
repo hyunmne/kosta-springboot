@@ -27,24 +27,18 @@ public class JwtAuthenticationFIlter extends UsernamePasswordAuthenticationFilte
 	public JwtAuthenticationFIlter(AuthenticationManager authenticationManager) {
 		super(authenticationManager);
 	}
+	
+	private JwtToken jwtToken = new JwtToken();
 
+	// super의 attemtAuthentication 메서드가 실행되고 성공하면 successfulAthentication가 호출됨
+	// attemptAuthentication 메소드가 리턴해준 Authentication을 파라미터로 받음
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		PrincipalDetails principalDetails = (PrincipalDetails)authResult.getPrincipal();
-		String accessToken = JWT.create()
-								.withSubject(principalDetails.getUsername())
-								.withIssuedAt(new Date(System.currentTimeMillis()))
-								.withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.ACCESS_EXPIRATION_TIME)) // 만료시간
-								.withClaim("id", principalDetails.getUser().getId()) // 가변적
-								.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 알고리즘 선택 후 서명
+		String accessToken = jwtToken.makeAccessToken(principalDetails.getUsername());
+		String refreshToken = jwtToken.makeRefreshToken(principalDetails.getUsername());
 		
-		String refreshToken = JWT.create()
-				.withSubject(principalDetails.getUsername())
-				.withIssuedAt(new Date(System.currentTimeMillis()))
-				.withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.REFRESH_EXPIRATION_TIME)) // 만료시간
-				.withClaim("id", principalDetails.getUser().getId()) // 가변적
-				.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 알고리즘 선택 후 서명
 
 		ObjectMapper objMapper = new ObjectMapper();
 		Map<String, String> map = new HashMap<>();
